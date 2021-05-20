@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:memmar_otomasyon_mobile/core/init/notifier/provider_list.dart';
+import 'package:memmar_otomasyon_mobile/core/init/notifier/theme_notifier.dart';
+import 'package:memmar_otomasyon_mobile/view/home_view.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  //await LocaleManager.preferencesInit();
+  runApp(MultiProvider(providers: [...ApplicationProvider.instance!.dependItems], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -9,55 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Memmarım',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: Provider.of<ThemeNotifier>(context).currentTheme,
+      initialRoute: '/',
+      routes: {},
+      home: HomeView(),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:memmar_otomasyon_mobile/core/base/base_state.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/home_page/home_page_view_model.dart';
+import 'package:memmar_otomasyon_mobile/view/product_page/product_page.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -108,7 +109,10 @@ class _HomePageState extends BaseState<HomePage> {
               return InkWell(
                 splashColor: Colors.grey,
                 onTap: (){
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProductPage()),
+                  );
                 },
                 child: Card(
                   color:

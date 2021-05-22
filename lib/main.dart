@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:memmar_otomasyon_mobile/core/init/cache/locale_manager.dart';
 import 'package:memmar_otomasyon_mobile/core/init/notifier/provider_list.dart';
 import 'package:memmar_otomasyon_mobile/core/init/notifier/theme_notifier.dart';
-import 'package:memmar_otomasyon_mobile/view/home_view.dart';
+import 'package:memmar_otomasyon_mobile/view/home_bottom/home_bottom.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: Provider.of<ThemeNotifier>(context).currentTheme,
       initialRoute: '/',
       routes: {},
-      home: HomeView(),
+      home: HomeBottom(),
     );
   }
 }

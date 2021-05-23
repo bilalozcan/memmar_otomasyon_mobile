@@ -88,12 +88,6 @@ class _HomePageState extends BaseState<HomePage> {
 
     context.read<HomePageViewModel>().changeSearchController(barcodeScanRes);
   }
-  Future<void> startBarcodeScanStream() async {
-    FlutterBarcodeScanner.getBarcodeStreamReceiver(
-        '#ff6666', 'Cancel', true, ScanMode.BARCODE)!
-        .listen((barcode) => print(barcode));
-    // Platform messages are asynchronous, so we initialize in an async method.
-  }
   Container contentWidget(BuildContext context) {
     return Container(
       height: dynamicHeight(0.5),

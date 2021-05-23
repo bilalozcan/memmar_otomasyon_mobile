@@ -5,8 +5,8 @@ class HomePageContents {
   IconData? icon;
   int? permission;
   Color? colors;
-
-  HomePageContents(this.text, this.icon, this.permission, this.colors);
+  Widget page;
+  HomePageContents(this.text, this.icon, this.permission, this.colors,this.page);
 }
 class HomePageViewModel extends ChangeNotifier {
   int permission = 1;
@@ -21,9 +21,9 @@ class HomePageViewModel extends ChangeNotifier {
     notifyListeners();
   }
 List<HomePageContents> contents = [
-  HomePageContents('Ürün Bul',Icons.ac_unit,1,Colors.green),
-  HomePageContents('Ürün Bilgisi Düzenle',Icons.ac_unit,1,Colors.red),
-  HomePageContents('Satışları Görüntüle',Icons.ac_unit,1,Colors.amber),
-  HomePageContents('Çalışanları Görüntüle',Icons.ac_unit,0,Colors.deepPurpleAccent),
+  HomePageContents('Ürünler',Icons.production_quantity_limits,1,Colors.blueGrey,Container()),
+  HomePageContents('Ürün Ekle',Icons.add,1,Colors.deepPurpleAccent,Container()),
+  HomePageContents('Ürün Düzenle',Icons.edit,1,Colors.red,Container()),
+
 ];
 }

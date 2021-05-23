@@ -28,7 +28,7 @@ class CustomInput extends StatefulWidget {
       this.hint = "",
       this.onchange,
         this.scanner=false,
-      this.width = 343,
+      this.width = double.infinity,
       this.ontap,
       this.initValue,
       this.hidePass = false,
@@ -48,9 +48,8 @@ class _CustomInputState extends BaseState<CustomInput> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 25),
       child: Container(
-        width: dynamicWidth(widget.width! / MediaQuery.of(context).size.width),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -68,14 +67,14 @@ class _CustomInputState extends BaseState<CustomInput> {
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                        blurRadius: 8, color: Colors.black.withOpacity(0.4))
+                        blurRadius: 8, color: Colors.black.withOpacity(0.1))
                   ]),
               child: Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Row(
                   children: [
                     Container(
-                      width: dynamicWidth(widget.width! / MediaQuery.of(context).size.width)-50,
+                      width: dynamicWidth(widget.width! / MediaQuery.of(context).size.width)-dynamicWidth(0.1),
                       child: TextFormField(
                         enabled: widget.enabled,
                         textInputAction: widget.inputAction,

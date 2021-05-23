@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class ProductViewPageModel extends ChangeNotifier{
-  int? productType;
+  int? productType=0;
   set productTypeChange(int value) {
     productType = value;
     notifyListeners();
@@ -46,4 +46,6 @@ class ProductViewPageModel extends ChangeNotifier{
     _barcodeCont = value;
     notifyListeners();
   }
+
+
 }

@@ -2,6 +2,7 @@ import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:memmar_otomasyon_mobile/core/base/base_state.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/home_bottom_view_model.dart';
+import 'package:memmar_otomasyon_mobile/view/settings_page/settings_page.dart';
 import 'package:provider/provider.dart';
 class HomeBottom extends StatefulWidget {
   const HomeBottom({Key? key}) : super(key: key);
@@ -22,6 +23,19 @@ class _HomeBottomState extends BaseState<HomeBottom> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Mammar'),
+        actions: [
+          GestureDetector(
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingPage()),
+              );
+            },
+            child: Icon(
+              Icons.settings
+            ),
+          )
+        ],
       ),
       body: context.watch<HomeBottomViewModel>().goToPage(),
         bottomNavigationBar: FancyBottomNavigation(

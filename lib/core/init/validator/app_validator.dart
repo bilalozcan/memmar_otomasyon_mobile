@@ -30,4 +30,5 @@ class AppValidator {
       return 'Şifre en az 8 karakter olmalıdır';
     }
   }
+
 }

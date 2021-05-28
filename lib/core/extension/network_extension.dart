@@ -4,7 +4,7 @@ extension ServicePathExtension on ServicePath {
   String get rawValue {
     switch (this) {
       case ServicePath.USERLOGIN:
-        return '/User/Login';
+        return '/user/login';
       case ServicePath.USERCREATE:
         return '/User/Create';
     }

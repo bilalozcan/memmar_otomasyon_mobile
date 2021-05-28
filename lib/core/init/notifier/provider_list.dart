@@ -4,6 +4,7 @@ import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/daily_salepa
 import 'package:memmar_otomasyon_mobile/view/home_bottom/home_bottom_view_model.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/home_page/home_page_view_model.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/receipt_create_page/receipt_create_view_model.dart';
+import 'package:memmar_otomasyon_mobile/view/login_page/login_page_view_model.dart';
 import 'package:memmar_otomasyon_mobile/view/product_page/product_view_page_model.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -27,5 +28,6 @@ class ApplicationProvider {
     ChangeNotifierProvider(create: (context) => ReceiptCreateViewModel()),
     ChangeNotifierProvider(create: (context) => AdminPageViewModel()),
     ChangeNotifierProvider(create: (context) => DailySalesViewModel()),
+    ChangeNotifierProvider(create: (context) => LoginPageViewModel()),
   ];
 }

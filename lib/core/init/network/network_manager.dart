@@ -1,4 +1,9 @@
+
+
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:memmar_otomasyon_mobile/core/base/base_model.dart';
 import 'package:memmar_otomasyon_mobile/core/constants/app/app_constans.dart';
 
 class NetworkManager {
@@ -18,5 +23,16 @@ class NetworkManager {
       headers: {},
       contentType: 'application/json',
     ));
+  }
+
+  Future dioPost<T extends BaseModel>(String path, dynamic data) async {
+
+    final response = await dio.post(path, data: data);
+    if (response.statusCode == HttpStatus.ok) {
+      return response;
+    } else {
+      print('dioPost Error Status Code: ${response.statusCode}');
+      return null;
+    }
   }
 }

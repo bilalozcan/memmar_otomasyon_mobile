@@ -1,4 +1,6 @@
 enum ServicePath {
   USERLOGIN,
   USERCREATE,
+  COMPANYCREATE
+
 }

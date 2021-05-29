@@ -6,7 +6,9 @@ extension ServicePathExtension on ServicePath {
       case ServicePath.USERLOGIN:
         return '/user/login';
       case ServicePath.USERCREATE:
-        return '/User/Create';
+        return '/user/create';
+      case ServicePath.COMPANYCREATE:
+        return '/company/create';
     }
   }
 }

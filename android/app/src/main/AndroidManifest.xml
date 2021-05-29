@@ -2,7 +2,8 @@
     package="com.mobuni.memmar_otomasyon_mobile">
    <application
         android:label="memmar_otomasyon_mobile"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

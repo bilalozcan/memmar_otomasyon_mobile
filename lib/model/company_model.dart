@@ -1,9 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:memmar_otomasyon_mobile/core/base/base_model.dart';
-part 'company_model.g.dart';
-@JsonSerializable()
-class Company extends BaseModel{
 
+part 'company_model.g.dart';
+
+@JsonSerializable()
+class Company extends BaseModel {
   Company({
     this.id,
     this.totalAmount,
@@ -25,8 +26,10 @@ class Company extends BaseModel{
   String? name;
 
   @override
-  fromJson(Map<String, dynamic> json) {
-    return _$CompanyFromJson(json);
-  }
+  fromJson(Map<String, dynamic> json) => _$CompanyFromJson(json);
+
+  factory Company.fromJson(Map<String, dynamic> json) => _$CompanyFromJson(json);
+
+  @override
   Map<String, dynamic> toJson() => _$CompanyToJson(this);
 }

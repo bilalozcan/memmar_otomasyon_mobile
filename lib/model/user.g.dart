@@ -7,6 +7,7 @@ part of 'user.dart';
 // **************************************************************************
 
 User _$UserFromJson(Map<String, dynamic> json) {
+  $checkKeys(json, disallowNullValues: const ['id']);
   return User(
     id: json['id'] as int?,
     fullName: json['fullName'] as String?,
@@ -20,12 +21,21 @@ User _$UserFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'id': instance.id,
-      'fullName': instance.fullName,
-      'email': instance.email,
-      'password': instance.password,
-      'userType': instance.userType,
-      'createdDate': instance.createdDate?.toIso8601String(),
-      'companyId': instance.companyId,
-    };
+Map<String, dynamic> _$UserToJson(User instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  val['fullName'] = instance.fullName;
+  val['email'] = instance.email;
+  val['password'] = instance.password;
+  val['userType'] = instance.userType;
+  val['createdDate'] = instance.createdDate?.toIso8601String();
+  val['companyId'] = instance.companyId;
+  return val;
+}

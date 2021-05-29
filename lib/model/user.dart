@@ -4,17 +4,18 @@ import 'package:memmar_otomasyon_mobile/core/base/base_model.dart';
 part 'user.g.dart';
 
 @JsonSerializable()
-class User extends BaseModel{
+class User extends BaseModel {
   User({
-  this.id,
-  this.fullName,
-  this.email,
-  this.password,
-  this.userType,
-  this.createdDate,
-  this.companyId,
+    this.id,
+    this.fullName,
+    this.email,
+    this.password,
+    this.userType,
+    this.createdDate,
+    this.companyId,
   });
 
+  @JsonKey(disallowNullValue: true)
   int? id;
   String? fullName;
   String? email;
@@ -23,10 +24,11 @@ class User extends BaseModel{
   DateTime? createdDate;
   int? companyId;
 
-
   @override
   fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
   @override
-  Map<String, dynamic> toJson() =>_$UserToJson(this);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }

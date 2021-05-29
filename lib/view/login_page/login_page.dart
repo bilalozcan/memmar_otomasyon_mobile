@@ -51,10 +51,14 @@ class _LoginPageState extends BaseState<LoginPage> {
               ),
               Center(
                 child: ElevatedButton(
-                    onPressed: () {
+                    onPressed:
+                    //context.read<LoginPageViewModel>().createUserTEST,
+                    //context.read<LoginPageViewModel>().createCompanyTEST,
+                    context.read<LoginPageViewModel>().loginUserTEST,
+                    /*() {
                       if (formKey.currentState!.validate() == false) return;
                       setState(() {});
-                    },
+                    },*/
                     child: Container(
                       width: dynamicWidth(0.7),
                       child: Center(child: Text('Giriş Yap')),

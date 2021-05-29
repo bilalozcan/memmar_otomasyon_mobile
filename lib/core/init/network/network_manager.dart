@@ -81,5 +81,7 @@ class NetworkManager {
         return baseResponse.data != null ? model.fromJson((baseResponse.data! as Map<String, dynamic>)) : null;
       }
     }
+    else
+      return null;
   }
 }

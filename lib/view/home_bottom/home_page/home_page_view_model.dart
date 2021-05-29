@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:memmar_otomasyon_mobile/view/home_bottom/home_page/product_list_page/product_list_page.dart';
+import 'package:memmar_otomasyon_mobile/view/product_page/product_page.dart';
 class HomePageContents {
   String? text;
   IconData? icon;
@@ -21,9 +23,8 @@ class HomePageViewModel extends ChangeNotifier {
     notifyListeners();
   }
 List<HomePageContents> contents = [
-  HomePageContents('Ürünler',Icons.production_quantity_limits,1,Colors.blueGrey,Container()),
-  HomePageContents('Ürün Ekle',Icons.add,1,Colors.deepPurpleAccent,Container()),
+  HomePageContents('Ürünler',Icons.production_quantity_limits,1,Colors.blueGrey,ProductListPage()),
+  HomePageContents('Ürün Ekle',Icons.add,1,Colors.deepPurpleAccent,ProductPage()),
   HomePageContents('Ürün Düzenle',Icons.edit,1,Colors.red,Container()),
-
 ];
 }

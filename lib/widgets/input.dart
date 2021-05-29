@@ -38,7 +38,15 @@ class CustomInput extends StatefulWidget {
       this.validateEmpty = false,
       this.enabled = true,
       this.inputFormatters,
-      this.validator});
+      this.validator}){
+    if(validator==null){
+      validator = (val){
+        if(val==''){
+          return '$hint boş olamaz';
+        }
+      };
+    }
+  }
 
   @override
   _CustomInputState createState() => _CustomInputState();

@@ -9,6 +9,10 @@ extension ServicePathExtension on ServicePath {
         return '/user/create';
       case ServicePath.COMPANYCREATE:
         return '/company/create';
+      case ServicePath.PRODUCTALL:
+        return '/product/all';
+      case ServicePath.PRODUCTCREATE:
+        return '/product/create';
     }
   }
 }

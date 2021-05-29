@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:memmar_otomasyon_mobile/core/base/base_state.dart';
+import 'package:memmar_otomasyon_mobile/model/user.dart';
+import 'package:memmar_otomasyon_mobile/view/home_bottom/home_bottom.dart';
+import 'package:memmar_otomasyon_mobile/view/home_bottom/home_page/home_page.dart';
 import 'package:memmar_otomasyon_mobile/view/login_page/login_page_view_model.dart';
 import 'package:memmar_otomasyon_mobile/widgets/input.dart';
 import 'package:provider/provider.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -10,13 +15,18 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends BaseState<LoginPage> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    Loader.hide();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Giriş'
-        ),
+        title: Text('Giriş'),
       ),
       body: Form(
         key: formKey,
@@ -30,8 +40,8 @@ class _LoginPageState extends BaseState<LoginPage> {
                 hint: 'input@gmail.com',
                 width: 357,
                 validateEmpty: true,
-                validator: (str){
-                  if(str==''){
+                validator: (str) {
+                  if (str == '') {
                     return 'Lütfen mail giriniz';
                   }
                 },
@@ -42,8 +52,8 @@ class _LoginPageState extends BaseState<LoginPage> {
                 hint: '*******',
                 hidePass: true,
                 validateEmpty: true,
-                validator: (str){
-                  if(str==''){
+                validator: (str) {
+                  if (str == '') {
                     return 'Lütfen şifre giriniz';
                   }
                 },
@@ -51,10 +61,17 @@ class _LoginPageState extends BaseState<LoginPage> {
               ),
               Center(
                 child: ElevatedButton(
-                    onPressed:
+                    onPressed: () async {
+                      if (formKey.currentState!.validate() == false) return;
+                      var user =await context
+                          .read<LoginPageViewModel>()
+                          .loginUserTEST(context);
+
+
+                    },
                     //context.read<LoginPageViewModel>().createUserTEST,
                     //context.read<LoginPageViewModel>().createCompanyTEST,
-                    context.read<LoginPageViewModel>().loginUserTEST,
+
                     /*() {
                       if (formKey.currentState!.validate() == false) return;
                       setState(() {});

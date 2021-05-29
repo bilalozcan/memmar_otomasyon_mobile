@@ -1,12 +1,17 @@
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:memmar_otomasyon_mobile/model/user.dart';
 import 'package:memmar_otomasyon_mobile/service/auth_service.dart';
+import 'package:memmar_otomasyon_mobile/view/home_bottom/home_bottom.dart';
 
 class LoginPageViewModel extends ChangeNotifier {
   final AuthService? _authService = AuthService.instance;
   var _email = TextEditingController();
   var _password = TextEditingController();
-
+  User? user = User();
   get email => _email;
 
   set email(value) {
@@ -45,9 +50,31 @@ class LoginPageViewModel extends ChangeNotifier {
     print('Debug');
   }
 
-  void loginUserTEST() async {
-    print('AAa');
-    var girisYapanKullanici = await _authService!.loginUser(email: 'mobile22@gmail.com', password: 'Bilal123');
-    print('Debug');
+   loginUserTEST(BuildContext context) async {
+    Loader.show(context,progressIndicator:CircularProgressIndicator());
+    var girisYapanKullanici = await _authService!.loginUser(email: _email.text, password: _password.text);
+    if(girisYapanKullanici==null){
+      Fluttertoast.showToast(
+          msg: "Kullanıcı bulunamadı veya şifre yanlış",
+        gravity: ToastGravity.SNACKBAR
+      );
+      Loader.hide();
+    }
+    else{
+      Fluttertoast.showToast(
+          msg: "Giriş Başarılı",
+          gravity: ToastGravity.SNACKBAR
+      );
+      Loader.hide();
+        await Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomeBottom()),
+        );
+    }
+
+
+    user = girisYapanKullanici;
+    return girisYapanKullanici;
+
   }
 }

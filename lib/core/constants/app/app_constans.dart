@@ -11,4 +11,8 @@ class ApplicationConstants {
     'TÜTÜN',
     'TEMEL GIDA',
   ];
+  static List<String> USER_TYPE = [
+    'YETKİLİ',
+    'ÇALIŞAN',
+  ];
 }

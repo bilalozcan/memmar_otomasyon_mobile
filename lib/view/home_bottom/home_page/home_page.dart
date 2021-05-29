@@ -105,7 +105,7 @@ class _HomePageState extends BaseState<HomePage> {
                 onTap: (){
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ProductPage()),
+                    MaterialPageRoute(builder: (context) => context.watch<HomePageViewModel>().contents[index].page),
                   );
                 },
                 child: Card(

@@ -41,6 +41,7 @@ dependencies:
   google_fonts:
   syncfusion_flutter_charts: ^19.1.64
   date_picker_timeline: ^1.2.3
+  flutter_overlay_loader: ^0.1.1
 
 dev_dependencies:
   build_runner: ^2.0.3

@@ -8,13 +8,14 @@ class BarcodeSearchWidget extends StatefulWidget {
   Function? onTap;
   Function? onChange;
   Function? onSubmited;
+  Function? onSubmitedButton;
   String? title;
   BarcodeTypeEnums? barcodeType;
   @override
   _BarcodeSearchWidgetState createState() => _BarcodeSearchWidgetState();
 
   BarcodeSearchWidget({this.controller, this.onTap, this.onChange,
-      this.onSubmited, this.title, this.barcodeType});
+      this.onSubmited, this.title, this.barcodeType,this.onSubmitedButton});
 }
 
 class _BarcodeSearchWidgetState extends BaseState<BarcodeSearchWidget> {
@@ -35,7 +36,7 @@ class _BarcodeSearchWidgetState extends BaseState<BarcodeSearchWidget> {
         child: Row(
           children: [
             Container(
-              width: dynamicWidth(0.8),
+              width: dynamicWidth(0.75),
               child: TextField(
                 onTap: () {
                   if(widget.onTap!=null)
@@ -55,6 +56,15 @@ class _BarcodeSearchWidgetState extends BaseState<BarcodeSearchWidget> {
                   hintText: widget.title,
                   prefixIcon: Icon(Icons.search),
                 ),
+              ),
+            ),
+            GestureDetector(
+              onTap: (){
+                if(widget.onSubmitedButton!=null)
+                  widget.onSubmitedButton!(widget.controller.text);
+              },
+              child: Container(
+                child: Icon(Icons.arrow_forward_ios,color: Colors.blue,),
               ),
             ),
             GestureDetector(

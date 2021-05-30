@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:memmar_otomasyon_mobile/model/company_model.dart';
 import 'package:memmar_otomasyon_mobile/model/user.dart';
 import 'package:memmar_otomasyon_mobile/service/auth_service.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/home_bottom.dart';
@@ -13,7 +14,11 @@ class LoginPageViewModel extends ChangeNotifier {
   var _password = TextEditingController();
   User? user = User();
   get email => _email;
-
+  Company company = Company();
+  companyUpdate(Company company){
+    this.company =company;
+    notifyListeners();
+  }
   set email(value) {
     _email = value;
     notifyListeners();
@@ -26,18 +31,6 @@ class LoginPageViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void createUserTEST() async {
-    User exampleUser = User.fromJson({
-      'fullName': 'Mobil Test User',
-      'email': 'mobiltest@gmail.com',
-      'password': 'deneme123',
-      'userType': 0,
-      'createdDate': '2021-05-29T03:28:00',
-      'companyId': 1
-    });
-    var olusanKullanici = await _authService!.createUser(user: exampleUser);
-    print('Debug');
-  }
 
   void createCompanyTEST() async {
     var olusanCompanyOwner = await _authService!.createCompany(companyCreateMap: {
@@ -61,6 +54,10 @@ class LoginPageViewModel extends ChangeNotifier {
       Loader.hide();
     }
     else{
+      user = girisYapanKullanici;
+      var userCopmany = await _authService!.getCompanyList(companyId: user!.companyId);
+      if(userCopmany!=null)this.company = userCopmany[0];
+      else return;
       Fluttertoast.showToast(
           msg: "Giriş Başarılı",
           gravity: ToastGravity.SNACKBAR
@@ -72,8 +69,6 @@ class LoginPageViewModel extends ChangeNotifier {
         );
     }
 
-
-    user = girisYapanKullanici;
     return girisYapanKullanici;
 
   }

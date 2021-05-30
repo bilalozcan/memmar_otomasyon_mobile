@@ -24,18 +24,18 @@ class Product extends BaseModel{
     this.updateDate,
     this.companyId,
   });
-
+@JsonKey(disallowNullValue: true)
   int? id;
   String? name;
   double? purchasePrice;
   int? stock;
   int? remaining;
   String? barcode;
-  int? countryCode;
+  String? countryCode;
   double? salePrice;
   int? productType;
-  int? isActive;
-  String? createdUser;
+  bool? isActive;
+  int? createdUser;
   DateTime? createdDate;
   int? supplierld;
   int? sold;

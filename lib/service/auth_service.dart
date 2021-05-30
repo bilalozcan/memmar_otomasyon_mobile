@@ -25,4 +25,15 @@ class AuthService {
 
   Future loginUser<Map>({required String email, required String password}) async => await _networkManager!
       .dioPostMap(path: ServicePath.USERLOGIN.rawValue, model: User(), data: {'email': email, 'password': password});
+
+  Future getUserList({required int? companyId}) async => await _networkManager!
+      .dioGet(path: ServicePath.USERLIST.rawValue, model: User(),queryParameters: {
+    "companyId":companyId,
+  },isList: true );
+  Future getCompanyList({required int? companyId}) async => await _networkManager!
+      .dioGet(path: ServicePath.COMPANYGET.rawValue, model: Company(),queryParameters: {
+    "companyId":companyId,
+  },isList: true );
+  Future updateCompany({required Company company}) async => await _networkManager!
+      .dioPutModel(path: ServicePath.COMPANYUPDATE.rawValue, model: Company(), data: company);
 }

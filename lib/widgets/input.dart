@@ -39,7 +39,7 @@ class CustomInput extends StatefulWidget {
       this.enabled = true,
       this.inputFormatters,
       this.validator}){
-    if(validator==null){
+    if(validator==null&&validateEmpty==true){
       validator = (val){
         if(val==''){
           return '$hint boş olamaz';

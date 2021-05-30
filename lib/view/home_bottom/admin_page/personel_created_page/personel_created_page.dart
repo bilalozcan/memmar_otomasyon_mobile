@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:memmar_otomasyon_mobile/core/base/base_state.dart';
 import 'package:memmar_otomasyon_mobile/core/constants/app/app_constans.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/personel_created_page/personel_created_view_model.dart';
@@ -12,6 +13,18 @@ class PersonelCreatedPage extends StatefulWidget {
 
 class _PersonelCreatedPageState extends BaseState<PersonelCreatedPage> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<PersonelCreatedViewModel>().clear();
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    Loader.hide();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,6 +80,7 @@ class _PersonelCreatedPageState extends BaseState<PersonelCreatedPage> {
                   child: ElevatedButton(
                       onPressed: () {
                         if (formKey.currentState!.validate() == false) return;
+                        context.read<PersonelCreatedViewModel>().createUser(context);
                       },
                       child: Container(
                         width: dynamicWidth(0.7),

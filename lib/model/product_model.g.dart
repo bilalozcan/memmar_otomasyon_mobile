@@ -7,6 +7,7 @@ part of 'product_model.dart';
 // **************************************************************************
 
 Product _$ProductFromJson(Map<String, dynamic> json) {
+  $checkKeys(json, disallowNullValues: const ['id']);
   return Product(
     id: json['id'] as int?,
     name: json['name'] as String?,
@@ -14,11 +15,11 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     stock: json['stock'] as int?,
     remaining: json['remaining'] as int?,
     barcode: json['barcode'] as String?,
-    countryCode: json['countryCode'] as int?,
+    countryCode: json['countryCode'] as String?,
     salePrice: (json['salePrice'] as num?)?.toDouble(),
     productType: json['productType'] as int?,
-    isActive: json['isActive'] as int?,
-    createdUser: json['createdUser'] as String?,
+    isActive: json['isActive'] as bool?,
+    createdUser: json['createdUser'] as int?,
     createdDate: json['createdDate'] == null
         ? null
         : DateTime.parse(json['createdDate'] as String),
@@ -31,21 +32,30 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'purchasePrice': instance.purchasePrice,
-      'stock': instance.stock,
-      'remaining': instance.remaining,
-      'barcode': instance.barcode,
-      'countryCode': instance.countryCode,
-      'salePrice': instance.salePrice,
-      'productType': instance.productType,
-      'isActive': instance.isActive,
-      'createdUser': instance.createdUser,
-      'createdDate': instance.createdDate?.toIso8601String(),
-      'supplierld': instance.supplierld,
-      'sold': instance.sold,
-      'updateDate': instance.updateDate?.toIso8601String(),
-      'companyId': instance.companyId,
-    };
+Map<String, dynamic> _$ProductToJson(Product instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  val['name'] = instance.name;
+  val['purchasePrice'] = instance.purchasePrice;
+  val['stock'] = instance.stock;
+  val['remaining'] = instance.remaining;
+  val['barcode'] = instance.barcode;
+  val['countryCode'] = instance.countryCode;
+  val['salePrice'] = instance.salePrice;
+  val['productType'] = instance.productType;
+  val['isActive'] = instance.isActive;
+  val['createdUser'] = instance.createdUser;
+  val['createdDate'] = instance.createdDate?.toIso8601String();
+  val['supplierld'] = instance.supplierld;
+  val['sold'] = instance.sold;
+  val['updateDate'] = instance.updateDate?.toIso8601String();
+  val['companyId'] = instance.companyId;
+  return val;
+}

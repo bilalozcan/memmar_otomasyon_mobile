@@ -5,10 +5,12 @@ part 'sales_model.g.dart';
 
 @JsonSerializable()
 class SalesModel extends BaseModel{
+  @JsonKey(disallowNullValue: true)
   int? id;
   int? productId;
   int? userId;
   DateTime? createdDate;
+  @JsonKey(disallowNullValue: true)
   int? receiptId;
   int? quantity;
 

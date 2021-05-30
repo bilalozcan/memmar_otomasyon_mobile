@@ -6,8 +6,12 @@ part 'receipt_model.g.dart';
 
 @JsonSerializable()
 class ReceiptModel extends BaseModel{
+  @JsonKey(disallowNullValue: true)
   int? id;
-  int? userId;
+  int? createdUser;
+  int? totalSales;
+  int? companyId;
+  double? totalAmount;
   int? paymentType;
   DateTime? createdDate;
   List<SalesModel> ?salesList;
@@ -25,4 +29,6 @@ class ReceiptModel extends BaseModel{
     return _$ReceiptModelToJson(this);
   }
 
+  ReceiptModel({this.id, this.createdUser, this.totalSales, this.totalAmount,
+      this.paymentType, this.createdDate, this.salesList,this.companyId});
 }

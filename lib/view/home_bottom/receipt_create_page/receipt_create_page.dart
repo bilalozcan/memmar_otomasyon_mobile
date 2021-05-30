@@ -1,9 +1,16 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
+import 'package:intl/intl.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:memmar_otomasyon_mobile/core/base/base_state.dart';
 import 'package:memmar_otomasyon_mobile/core/constants/enums/barcode_type_enums.dart';
+
+import 'package:memmar_otomasyon_mobile/view/home_bottom/home_page/product_list_page/product_list_view_model.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/receipt_create_page/receipt_create_view_model.dart';
+import 'package:memmar_otomasyon_mobile/view/login_page/login_page_view_model.dart';
+import 'package:memmar_otomasyon_mobile/widgets/DropdownButton.dart';
+
 import 'package:memmar_otomasyon_mobile/widgets/barcodeSearchWidget.dart';
 import 'package:provider/provider.dart';
 
@@ -14,79 +21,147 @@ class ReceiptCreatePage extends StatefulWidget {
 
 class _ReceiptCreatePageState extends BaseState<ReceiptCreatePage> {
   @override
+  void dispose() {
+    // TODO: implement dispose
+    Loader.hide();
+    super.dispose();
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<ProductListViewModel>().clear();
+    Future.delayed(Duration.zero, () {
+      context.read<ProductListViewModel>().wait = true;
+      context.read<ProductListViewModel>().getproductList(context);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          width: double.infinity,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 10,
-                ),
-                BarcodeSearchWidget(
-                  controller:
-                      context.read<ReceiptCreateViewModel>().searchController,
-                  title: 'Ürün Ekle',
-                  barcodeType: BarcodeTypeEnums.STREAM,
-                  onChange: (value) {
-                    //context.read<ReceiptCreateViewModel>().searchController(value);
-                  },
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: dynamicWidth(0.85),
-                  height: dynamicHeight(0.65),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      border: Border.all(width: 1, color: Colors.black)),
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Stack(
-                        children: [
-                          receiptContent(context),
-                          GestureDetector(
-                            onTap: () {
-                              context
-                                      .read<ReceiptCreateViewModel>()
-                                      .companyInfoControl =
-                                  !context
-                                      .read<ReceiptCreateViewModel>()
-                                      .companyInfoControl;
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Container(
-
-                                  decoration: BoxDecoration(
-                                      color: Colors.amber.withOpacity(0.5),
-                                    borderRadius: BorderRadius.all(Radius.circular(50))
-                                  ),
-                                  child: Icon(context
+        child: Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    BarcodeSearchWidget(
+                      controller: context
+                          .read<ReceiptCreateViewModel>()
+                          .searchController,
+                      title: 'Ürün Ekle',
+                      barcodeType: BarcodeTypeEnums.STREAM,
+                      onTap: () {
+                        context.read<ReceiptCreateViewModel>().totalview = true;
+                        print('true');
+                      },
+                      onSubmitedButton: (value) {
+                        if (value != '') {
+                          var newValue = value.split("*");
+                          context
+                              .read<ReceiptCreateViewModel>()
+                              .getProduct(context, newValue);
+                        }
+                      },
+                      onSubmited: (value) {
+                        context.read<ReceiptCreateViewModel>().totalview =
+                            false;
+                        if (value != '') {
+                          var newValue = value.split("*");
+                          context
+                              .read<ReceiptCreateViewModel>()
+                              .getProduct(context, newValue);
+                        }
+                      },
+                      onChange: (value) {
+                        //context.read<ReceiptCreateViewModel>().searchController(value);
+                      },
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: dynamicWidth(0.85),
+                      height: dynamicHeight(0.68),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          border: Border.all(width: 1, color: Colors.black)),
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Stack(
+                            children: [
+                              receiptContent(context),
+                              GestureDetector(
+                                onTap: () {
+                                  context
                                           .read<ReceiptCreateViewModel>()
-                                          .companyInfoControl
-                                      ? Icons.keyboard_arrow_right
-                                      : Icons.keyboard_arrow_down),
+                                          .companyInfoControl =
+                                      !context
+                                          .read<ReceiptCreateViewModel>()
+                                          .companyInfoControl;
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.amber.withOpacity(0.5),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(50))),
+                                      child: Icon(context
+                                              .read<ReceiptCreateViewModel>()
+                                              .companyInfoControl
+                                          ? Icons.keyboard_arrow_right
+                                          : Icons.keyboard_arrow_down),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
-                )
-              ],
+                  ],
+                ),
+              ),
             ),
-          ),
+            Visibility(
+              visible:
+                  context.watch<ReceiptCreateViewModel>().totalview == true,
+              child: Positioned(
+                bottom: 0,
+                right: 0,
+                child: Container(
+                  height: 30,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: Colors.green.withOpacity(0.8),
+                  ),
+                  child: Center(
+                    child: Text(
+                      '${context.watch<ReceiptCreateViewModel>().totalAmount} ₺',
+                      textAlign: TextAlign.start,
+                      style: GoogleFonts.roboto(
+                          fontSize: dynamicHeight(0.03),
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -103,21 +178,86 @@ class _ReceiptCreatePageState extends BaseState<ReceiptCreatePage> {
                 : dynamicHeight(0.6),
             color: Colors.grey,
             child: ListView.builder(
-              itemCount: 50,
+              itemCount: context.watch<ReceiptCreateViewModel>().sales.length,
               itemBuilder: (BuildContext context, int index) {
                 return Card(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('Item ${index + 1}'),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            '${context.watch<ReceiptCreateViewModel>().sales[index].quantity} * ${context.watch<ReceiptCreateViewModel>().products[index].name}'),
+                        GestureDetector(
+                          onTap: () {
+                            int selectQ =0;
+                            List<String> list = [];
+                            for(int i = 0;i<context.watch<ReceiptCreateViewModel>().sales[index].quantity!;++i){
+                              list.add('${i+1}');
+                            }
+                            AwesomeDialog(
+                              context: context,
+                              animType: AnimType.SCALE,
+                              dialogType: DialogType.INFO,
+                              title: 'Adet Seçiniz',
+
+                              body: Container(
+                                child:  DropdownButtonWidget(
+                                  list: list,
+                                  title: 'Ürün Adedi',
+                                  textName: 'Ürün Adedi',
+                                  function: (value) {
+                                    selectQ = value+1;
+                                   // context.read<ProductViewPageModel>().productType = value;
+                                  },
+                                ),
+                              ),
+                              btnOkOnPress: (){
+                                context.read<ReceiptCreateViewModel>().receiptProductDelete(index,selectQ);
+                              }
+                            )..show();
+
+                          },
+                          child: Icon(
+                            Icons.delete_forever,
+                            color: Colors.red,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 );
               },
             )),
-        Text(
-          'TOPLAM: 39.90',
-          textAlign: TextAlign.start,
-          style: GoogleFonts.noticiaText(
-              fontSize: dynamicHeight(0.03), fontWeight: FontWeight.bold),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'TOPLAM: ${context.watch<ReceiptCreateViewModel>().totalAmount} ₺',
+              textAlign: TextAlign.start,
+              style: GoogleFonts.roboto(
+                  fontSize: dynamicHeight(0.03), fontWeight: FontWeight.bold),
+            ),
+            Visibility(
+              visible: context.watch<ReceiptCreateViewModel>().sales.length > 0,
+              child: ElevatedButton(
+                  onPressed: () {
+                    AwesomeDialog(
+                      context: context,
+                      animType: AnimType.SCALE,
+                      dialogType: DialogType.INFO,
+                      title: 'Uyarı',
+                      desc:'Fişi Tamamlamak istediğinize emin misiniz?',
+                      btnOkOnPress: () {
+                        context.read<ReceiptCreateViewModel>().postReceipt(context);
+                      }
+                      ,
+                    )..show();
+
+                  },
+                  child: Text('Tamamla')),
+            ),
+          ],
         ),
       ],
     );
@@ -125,11 +265,12 @@ class _ReceiptCreatePageState extends BaseState<ReceiptCreatePage> {
 
   Container companyInfoWidget() {
     return Container(
-      height: dynamicHeight(0.2),
+      height: dynamicHeight(0.18),
       child: Column(
+
         children: [
           Text(
-            'MEMMAR HİPERMARKET',
+            context.read<LoginPageViewModel>().company.name.toString(),
             textAlign: TextAlign.center,
             maxLines: 1,
             style: GoogleFonts.noticiaText(fontSize: dynamicHeight(0.03)),
@@ -140,7 +281,7 @@ class _ReceiptCreatePageState extends BaseState<ReceiptCreatePage> {
             style: GoogleFonts.noticiaText(fontSize: dynamicHeight(0.02)),
           ),
           Text(
-            'KASİYER ADI:MEHMET ARSAY',
+            'KASİYER ADI: ${context.watch<LoginPageViewModel>().user!.fullName.toString()}',
             textAlign: TextAlign.start,
             style: GoogleFonts.noticiaText(fontSize: dynamicHeight(0.02)),
           ),
@@ -157,26 +298,58 @@ class _ReceiptCreatePageState extends BaseState<ReceiptCreatePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'TARİH:02.01.2020',
+                    'TARİH:${DateFormat('dd.MM.yyyy').format(DateTime.now())}',
                     textAlign: TextAlign.start,
                     style:
                         GoogleFonts.noticiaText(fontSize: dynamicHeight(0.02)),
                   ),
-                  Text(
+                  /*Text(
                     'FİŞ NO:351',
                     textAlign: TextAlign.start,
                     style:
                         GoogleFonts.noticiaText(fontSize: dynamicHeight(0.02)),
-                  ),
+                  ),*/
+
                 ],
               ),
               Text(
-                'SAAT: 18.30',
+                'SAAT: ${DateFormat('HH:mm').format(DateTime.now())}',
                 textAlign: TextAlign.start,
                 style: GoogleFonts.noticiaText(fontSize: dynamicHeight(0.02)),
               ),
+
             ],
           ),
+          Visibility(
+            visible: context.watch<ReceiptCreateViewModel>().sales.length>0,
+            child: GestureDetector(
+              onTap: (){
+                AwesomeDialog(
+                  context: context,
+                  animType: AnimType.SCALE,
+                  dialogType: DialogType.INFO,
+                  title: 'Uyarı',
+                  desc:'Fişi temizlemek istediğinize emin misiniz?',
+                  btnOkOnPress: () {
+                    context.read<ReceiptCreateViewModel>().removeAll();
+                  }
+                  ,
+                )..show();
+
+              },
+              child: Container(
+                width: dynamicWidth(0.85),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                    'Temizle',
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.w700
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

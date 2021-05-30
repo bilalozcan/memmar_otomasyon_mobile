@@ -29,7 +29,7 @@ class PersonelCreatedViewModel extends ChangeNotifier{
       'password':this.password.text,
       'userType': this.userType,
       'createdDate': DateTime.now().toString(),
-      'companyId':context.watch<LoginPageViewModel>().user!.id,
+      'companyId':context.read<LoginPageViewModel>().user!.id,
     });
     var olusanKullanici = await _authService!.createUser(user: exampleUser);
     Loader.hide();

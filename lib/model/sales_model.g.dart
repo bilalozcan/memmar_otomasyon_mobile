@@ -7,6 +7,7 @@ part of 'sales_model.dart';
 // **************************************************************************
 
 SalesModel _$SalesModelFromJson(Map<String, dynamic> json) {
+  $checkKeys(json, disallowNullValues: const ['id', 'receiptId']);
   return SalesModel(
     id: json['id'] as int?,
     productId: json['productId'] as int?,
@@ -19,12 +20,20 @@ SalesModel _$SalesModelFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$SalesModelToJson(SalesModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'productId': instance.productId,
-      'userId': instance.userId,
-      'createdDate': instance.createdDate?.toIso8601String(),
-      'receiptId': instance.receiptId,
-      'quantity': instance.quantity,
-    };
+Map<String, dynamic> _$SalesModelToJson(SalesModel instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  val['productId'] = instance.productId;
+  val['userId'] = instance.userId;
+  val['createdDate'] = instance.createdDate?.toIso8601String();
+  writeNotNull('receiptId', instance.receiptId);
+  val['quantity'] = instance.quantity;
+  return val;
+}

@@ -16,7 +16,7 @@ class _HomePageState extends BaseState<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    context.read<HomePageViewModel>().clear();
   }
 
   @override
@@ -47,26 +47,96 @@ class _HomePageState extends BaseState<HomePage> {
               ),
               if (context.watch<HomePageViewModel>().contentView)
                 contentWidget(context),
-              if (!context.watch<HomePageViewModel>().contentView)Container(
-                height: dynamicHeight(0.5),
-                child: ListView.builder(
-                  itemCount: 50,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Item ${index + 1}'),
-                      ),
-                    );
-                  },
-                )
-              ),
+              if (!context.watch<HomePageViewModel>().contentView)
+                productListHomeWidget(context),
             ],
           ),
         ),
       ),
     );
   }
+
+   productListHomeWidget(BuildContext context) {
+    return Container(
+        height: dynamicHeight(0.5),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  width: dynamicWidth(0.3),
+                  child: Text('Ürün'),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  width: dynamicWidth(0.3),
+                  child: Text('Fiyat(₺)'),
+                ),
+                Container(
+                    alignment: Alignment.center,
+                    width: dynamicWidth(0.3),
+                    child: Text('Stock')),
+              ],
+            ),
+            Divider(
+              color: Colors.black,
+            ),
+            Container(
+              height: dynamicHeight(0.25),
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: context.read<HomePageViewModel>().productList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                    onTap: (){
+                      Future<dynamic> future = Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ProductPage(product:context.read<HomePageViewModel>().productList[index] ,)),
+                      );
+                      future.then((value) {
+                        if (value != null) {
+                          context.read<HomePageViewModel>().wait = true;
+                          context.read<HomePageViewModel>().getproductList(context);
+                        }
+
+                      });
+                    },
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              width: dynamicWidth(0.3),
+                              child: Text(
+                                  '${context.read<HomePageViewModel>().productList[index].name}'),
+                            ),
+                            Container(
+                                alignment: Alignment.center,
+                                width: dynamicWidth(0.3),
+                                child: Text(
+                                    '${context.read<HomePageViewModel>().productList[index].salePrice}')),
+                            Container(
+                                alignment: Alignment.center,
+                                width: dynamicWidth(0.3),
+                                child: Text(
+                                    '${context.read<HomePageViewModel>().productList[index].stock}')),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ));
+  }
+
   Future<void> scanBarcodeNormal() async {
     String barcodeScanRes;
     // Platform messages may fail, so we use a try/catch PlatformException.
@@ -81,13 +151,14 @@ class _HomePageState extends BaseState<HomePage> {
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
-    if (!mounted||barcodeScanRes=='-1') {
+    if (!mounted || barcodeScanRes == '-1') {
       context.read<HomePageViewModel>().contentViewChange(true);
       return;
     }
 
-    context.read<HomePageViewModel>().changeSearchController(barcodeScanRes);
+    context.read<HomePageViewModel>().searchController.text = barcodeScanRes;
   }
+
   Container contentWidget(BuildContext context) {
     return Container(
       height: dynamicHeight(0.5),
@@ -102,10 +173,14 @@ class _HomePageState extends BaseState<HomePage> {
             itemBuilder: (BuildContext context, int index) {
               return InkWell(
                 splashColor: Colors.grey,
-                onTap: (){
+                onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => context.watch<HomePageViewModel>().contents[index].page),
+                    MaterialPageRoute(
+                        builder: (context) => context
+                            .watch<HomePageViewModel>()
+                            .contents[index]
+                            .page),
                   );
                 },
                 child: Card(
@@ -119,9 +194,13 @@ class _HomePageState extends BaseState<HomePage> {
                         height: dynamicHeight(0.08),
                         decoration: BoxDecoration(
                             color: Colors.black.withOpacity(0.11),
-                            borderRadius: BorderRadius.all(Radius.circular(50))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(50))),
                         child: Icon(
-                          context.watch<HomePageViewModel>().contents[index].icon,
+                          context
+                              .watch<HomePageViewModel>()
+                              .contents[index]
+                              .icon,
                           color: Colors.white,
                         ),
                       ),
@@ -162,12 +241,21 @@ class _HomePageState extends BaseState<HomePage> {
             width: dynamicWidth(0.8),
             child: TextField(
               onTap: () {
+                context.read<HomePageViewModel>().wait = true;
+                Future.delayed(Duration.zero, () {
+                  context.read<HomePageViewModel>().getproductList(context);
+                });
                 context.read<HomePageViewModel>().contentViewChange(false);
               },
               onSubmitted: (v) {
                 context.read<HomePageViewModel>().contentViewChange(true);
               },
-              onChanged: (value) {},
+              onChanged: (value) {
+                context.read<HomePageViewModel>().wait = true;
+                Future.delayed(Duration.zero, () {
+                  context.read<HomePageViewModel>().getproductList(context);
+                });
+              },
               controller: context.read<HomePageViewModel>().searchController,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -177,7 +265,7 @@ class _HomePageState extends BaseState<HomePage> {
             ),
           ),
           GestureDetector(
-            onTap: (){
+            onTap: () {
               scanBarcodeNormal();
             },
             child: Container(

@@ -22,7 +22,21 @@ class NetworkManager {
       contentType: 'application/json',
     ));
   }
-
+  /// Sabit bir reponse için PUT methodu
+  /// path: URL'in sonuna eklenecek endpoint kısmını belirtir
+  /// model: POST işlemi sonucunda gelen yanıtın hangi model sınıfına dönüşeceğini belirtir
+  /// data: POST işleminde gönderilecek dataları içeren MAP'i ifade eder
+  /// isList: GET işlemi sonucunda liste mi yoksa tek bir veri mi geleceğini alan ifade eder
+  Future dioPutModel<T extends BaseModel>(
+      {required String path, required T model, required T data, bool isList = false}) async {
+    final response = await dio.put(path, data: data.toJson());
+    if (response.statusCode == HttpStatus.ok) {
+      return _baseResponseConverter(response.data, model, isList);
+    } else {
+      print('dioPut Error Status Code: ${response.statusCode}');
+      return null;
+    }
+  }
   /// Sabit bir reponse için POST methodu
   /// path: URL'in sonuna eklenecek endpoint kısmını belirtir
   /// model: POST işlemi sonucunda gelen yanıtın hangi model sınıfına dönüşeceğini belirtir

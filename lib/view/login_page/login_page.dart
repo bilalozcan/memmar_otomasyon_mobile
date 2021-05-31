@@ -5,6 +5,7 @@ import 'package:memmar_otomasyon_mobile/model/user.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/home_bottom.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/home_page/home_page.dart';
 import 'package:memmar_otomasyon_mobile/view/login_page/login_page_view_model.dart';
+import 'package:memmar_otomasyon_mobile/view/register_page/register_page.dart';
 import 'package:memmar_otomasyon_mobile/widgets/input.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,9 @@ class _LoginPageState extends BaseState<LoginPage> {
       body: Form(
         key: formKey,
         child: Container(
+          alignment: Alignment.center,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomInput(
@@ -80,6 +83,25 @@ class _LoginPageState extends BaseState<LoginPage> {
                       width: dynamicWidth(0.7),
                       child: Center(child: Text('Giriş Yap')),
                     )),
+              ),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Hesabın Yok mu? ',),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => RegisterPage()),
+                        );
+                      },
+                      child: Text('Kayıt Ol',style: TextStyle(
+                        fontWeight: FontWeight.w900
+                      ),),
+                    )
+                  ],
+                ),
               )
             ],
           ),

@@ -11,6 +11,7 @@ import 'package:memmar_otomasyon_mobile/view/home_bottom/home_page/product_list_
 import 'package:memmar_otomasyon_mobile/view/home_bottom/receipt_create_page/receipt_create_view_model.dart';
 import 'package:memmar_otomasyon_mobile/view/login_page/login_page_view_model.dart';
 import 'package:memmar_otomasyon_mobile/view/product_page/product_view_page_model.dart';
+import 'package:memmar_otomasyon_mobile/view/register_page/register_page_view_model.dart';
 import 'package:memmar_otomasyon_mobile/view/settings_page/settings_page.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -41,5 +42,6 @@ class ApplicationProvider {
     ChangeNotifierProvider(create: (context) => SupplierCreatedViewModel()),
     ChangeNotifierProvider(create: (context) => SupplierListViewModel()),
     ChangeNotifierProvider(create: (context) => SettingsViewModel()),
+    ChangeNotifierProvider(create: (context) => RegisterPageViewModel()),
   ];
 }

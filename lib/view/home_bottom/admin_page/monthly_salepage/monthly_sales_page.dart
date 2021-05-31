@@ -8,19 +8,19 @@ import 'package:memmar_otomasyon_mobile/view/login_page/login_page_view_model.da
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
-class DailySalesPage extends StatefulWidget {
+class MonthlySalesPage extends StatefulWidget {
   @override
-  _DailySalesPageState createState() => _DailySalesPageState();
+  _MonthlySalesPageState createState() => _MonthlySalesPageState();
 }
 
-class _DailySalesPageState extends BaseState<DailySalesPage> {
+class _MonthlySalesPageState extends BaseState<MonthlySalesPage> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     Future.delayed(Duration.zero, () {
-      context.read<DailySalesViewModel>().wait = true;
-      context.read<DailySalesViewModel>().getReceiptList(context);
+      context.read<MonthlySalesViewModel>().wait = true;
+      context.read<MonthlySalesViewModel>().getReceiptList(context);
     });
   }
 
@@ -39,17 +39,17 @@ class _DailySalesPageState extends BaseState<DailySalesPage> {
                 children: <Widget>[
                   DatePicker(
                     DateTime(DateTime.now().year, DateTime.now().month,
-                        DateTime.now().day - 5),
+                        DateTime.now().day - 50),
                     initialSelectedDate:
-                        context.watch<DailySalesViewModel>().selectedDate,
+                        context.watch<MonthlySalesViewModel>().selectedDate,
                     selectionColor: Colors.blue,
                     selectedTextColor: Colors.white,
                     onDateChange: (date) {
-                      context.read<DailySalesViewModel>().selectedDate = date;
+                      context.read<MonthlySalesViewModel>().selectedDate = date;
                       Future.delayed(Duration.zero, () {
-                        context.read<DailySalesViewModel>().wait = true;
+                        context.read<MonthlySalesViewModel>().wait = true;
                         context
-                            .read<DailySalesViewModel>()
+                            .read<MonthlySalesViewModel>()
                             .getReceiptList(context);
                       });
                     },
@@ -95,24 +95,24 @@ class _DailySalesPageState extends BaseState<DailySalesPage> {
               Divider(
                 color: Colors.black,
               ),
-              context.watch<DailySalesViewModel>().wait == false
+              context.watch<MonthlySalesViewModel>().wait == false
                   ? Expanded(
                       child: ListView.builder(
                         itemCount: context
-                            .watch<DailySalesViewModel>()
+                            .watch<MonthlySalesViewModel>()
                             .receiptList
                             .length,
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
                             splashColor: Colors.blue,
                             onTap: () {
-                              showDialog<void>(
+                              /*showDialog<void>(
                                 context: context,
                                 // user must tap button!
                                 builder: (BuildContext context) {
-                                  return Container(
-                                    color: Colors.white,
-                                    child: SingleChildScrollView(
+                                  return AlertDialog(
+                                    title: const Text('AlertDialog Title'),
+                                    content: SingleChildScrollView(
                                       child: Column(
                                         children: [
                                           Container(
@@ -121,26 +121,26 @@ class _DailySalesPageState extends BaseState<DailySalesPage> {
                                               child: ListView.builder(
                                                 itemCount: context
                                                     .watch<
-                                                    DailySalesViewModel>()
+                                                        MonthlySalesViewModel>()
                                                     .receiptList[index]
                                                     .salesList!
                                                     .length,
                                                 itemBuilder:
                                                     (BuildContext context,
-                                                    int index2) {
+                                                        int index2) {
                                                   return Card(
                                                     child: Padding(
                                                       padding:
-                                                      const EdgeInsets.all(
-                                                          8.0),
+                                                          const EdgeInsets.all(
+                                                              8.0),
                                                       child: Row(
                                                         mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: [
                                                           Text(
-                                                              '${context.watch<DailySalesViewModel>().receiptList[index].salesList![index2].quantity} *'
-                                                                  ' ${context.watch<DailySalesViewModel>().receiptList[index].salesList![index2].productId}'),
+                                                              '${context.watch<MonthlySalesViewModel>().receiptList[index].salesList![index2].quantity} *'
+                                                              ' ${context.watch<MonthlySalesViewModel>().receiptList[index].salesList![index2].productId}'),
                                                         ],
                                                       ),
                                                     ),
@@ -149,25 +149,33 @@ class _DailySalesPageState extends BaseState<DailySalesPage> {
                                               )),
                                           Row(
                                             mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                'TOPLAM: ${context.watch<DailySalesViewModel>().receiptList[index].totalAmount} ₺',
+                                                'TOPLAM: ${context.watch<MonthlySalesViewModel>().receiptList[index].totalAmount} ₺',
                                                 textAlign: TextAlign.start,
                                                 style: GoogleFonts.roboto(
                                                     fontSize:
-                                                    dynamicHeight(0.03),
+                                                        dynamicHeight(0.03),
                                                     fontWeight:
-                                                    FontWeight.bold),
+                                                        FontWeight.bold),
                                               ),
                                             ],
                                           ),
                                         ],
                                       ),
                                     ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: const Text('Approve'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
                                   );
                                 },
-                              );
+                              );*/
                             },
                             child: receiptCardWidget(context, index),
                           );
@@ -191,7 +199,7 @@ class _DailySalesPageState extends BaseState<DailySalesPage> {
             Text(
               DateFormat('dd.MM.yyy HH.mm')
                   .format(context
-                      .watch<DailySalesViewModel>()
+                      .watch<MonthlySalesViewModel>()
                       .receiptList[index]
                       .createdDate!)
                   .toString(),
@@ -203,7 +211,7 @@ class _DailySalesPageState extends BaseState<DailySalesPage> {
             ),
             Text(
               context
-                          .watch<DailySalesViewModel>()
+                          .watch<MonthlySalesViewModel>()
                           .receiptList[index]
                           .paymentType ==
                       0
@@ -217,7 +225,7 @@ class _DailySalesPageState extends BaseState<DailySalesPage> {
             ),
             Text(
               context
-                      .watch<DailySalesViewModel>()
+                      .watch<MonthlySalesViewModel>()
                       .receiptList[index]
                       .totalAmount
                       .toString() +
@@ -235,7 +243,7 @@ class _DailySalesPageState extends BaseState<DailySalesPage> {
   }
 }
 
-class DailySalesViewModel extends ChangeNotifier {
+class MonthlySalesViewModel extends ChangeNotifier {
   final ReceiptService? _receiptService = ReceiptService.instance;
   DateTime? _selectedDate = DateTime.now();
 

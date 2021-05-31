@@ -101,7 +101,7 @@ class _ProductListPageState extends BaseState<ProductListPage> {
                                           color: Colors.black),
                                     ),
                                     Text(
-                                      'Kalan Stok: '+context.read<ProductListViewModel>().productList[index].remaining.toString(),
+                                      'Kalan Stok: '+context.read<ProductListViewModel>().productList[index].stock.toString(),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: dynamicHeight(0.02),

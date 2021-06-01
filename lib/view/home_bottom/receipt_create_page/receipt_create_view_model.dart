@@ -79,6 +79,13 @@ class ReceiptCreateViewModel extends ChangeNotifier {
     }
     for (var a in context.read<ProductListViewModel>().productList) {
       if (a.barcode == brcd) {
+        if(((a.stock!-a.sold!)-int.tryParse(quant)!)<=0)
+          {
+            Fluttertoast.showToast(msg: 'Yeterli Stok Yok');
+            searchController.clear();
+            notifyListeners();
+            return;
+          }
         for (var b in sales) {
           if (a.id == b.productId) {
             b.quantity = (b.quantity! + int.tryParse(quant)!);

@@ -5,6 +5,7 @@ import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/personel_cre
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/personel_list_page/personel_list_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/supplier_created_page/supplier_created_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/supplier_list_page/supplier_list_page.dart';
+import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/supply_list_page/supply_list_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/home_bottom_view_model.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/home_page/home_page_view_model.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/home_page/product_list_page/product_list_view_model.dart';
@@ -43,5 +44,6 @@ class ApplicationProvider {
     ChangeNotifierProvider(create: (context) => SupplierListViewModel()),
     ChangeNotifierProvider(create: (context) => SettingsViewModel()),
     ChangeNotifierProvider(create: (context) => RegisterPageViewModel()),
+    ChangeNotifierProvider(create: (context) => SupplyListViewModel()),
   ];
 }

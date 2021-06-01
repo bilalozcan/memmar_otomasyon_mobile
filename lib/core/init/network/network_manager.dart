@@ -67,12 +67,21 @@ class NetworkManager {
       print('Dio Get Error Status Code: ${response.statusCode}');
     }
   }
-
   Future dioPostMap<T extends BaseModel>(
       {required String path, required T model, required Map data, bool isList = false}) async {
     final response = await dio.post(path, data: data);
     if (response.statusCode == HttpStatus.ok) {
       return _baseResponseConverter(response.data, model, isList);
+    } else {
+      print('dioPostLogin Error Status Code: ${response.statusCode}');
+      return null;
+    }
+  }
+  Future dioDeleteMap<T extends BaseModel>(
+      {required String path, required T model, required Map data, bool isList = false}) async {
+    final response = await dio.delete(path, data: data);
+    if (response.statusCode == HttpStatus.ok) {
+      return data;
     } else {
       print('dioPostLogin Error Status Code: ${response.statusCode}');
       return null;

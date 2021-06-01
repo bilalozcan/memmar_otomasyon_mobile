@@ -26,6 +26,10 @@ class ProductService {
 
   Future createProduct({required Map productCreateMap}) async => await _networkManager!
       .dioPostMap(path: ServicePath.PRODUCTCREATE.rawValue, model: Product(), data: productCreateMap);
+
+  Future deleteProduct({required Map productCreateMap}) async => await _networkManager!
+      .dioDeleteMap(path: ServicePath.PRODUCTDELETE.rawValue, model: Product(), data: productCreateMap);
+
   Future updateProduct({required Product product}) async => await _networkManager!
       .dioPutModel(path: ServicePath.PRODUCTUPDATE.rawValue, model: Product(), data: product);
 }

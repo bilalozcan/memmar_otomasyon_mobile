@@ -13,7 +13,6 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     name: json['name'] as String?,
     purchasePrice: (json['purchasePrice'] as num?)?.toDouble(),
     stock: json['stock'] as int?,
-    remaining: json['remaining'] as int?,
     barcode: json['barcode'] as String?,
     countryCode: json['countryCode'] as String?,
     salePrice: (json['salePrice'] as num?)?.toDouble(),
@@ -45,7 +44,6 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   val['name'] = instance.name;
   val['purchasePrice'] = instance.purchasePrice;
   val['stock'] = instance.stock;
-  val['remaining'] = instance.remaining;
   val['barcode'] = instance.barcode;
   val['countryCode'] = instance.countryCode;
   val['salePrice'] = instance.salePrice;

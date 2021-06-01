@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/daily_salepage/daily_sales_page.dart';
+import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/monthly_salepage/monthly_sales_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/personel_created_page/personel_created_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/personel_graphic_page/personel_graphic%C4%B0_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/personel_list_page/personel_list_page.dart';
@@ -15,7 +16,7 @@ class AdminPageViewModel extends ChangeNotifier {
     HomePageContents('Çalışan Raporları',Icons.bar_chart,0,Colors.blueAccent,PersonelGraphicPage()),
 
     HomePageContents('Günlük Satışları Görüntüle',Icons.table_rows,1,Colors.lightGreen,DailySalesPage()),
-    HomePageContents('Aylık Satışları Görüntüle',Icons.table_chart,1,Colors.greenAccent,Container()),
+    HomePageContents('Aylık Satışları Görüntüle',Icons.table_chart,1,Colors.greenAccent,MonthlySalesPage()),
     HomePageContents('Yıllık Satışları Görüntüle',Icons.table_rows_rounded,1,Colors.green,Container()),
 
     HomePageContents('Tedarikçiler',Icons.person_pin_rounded,1,Colors.yellow,SupplierListPage()),

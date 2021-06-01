@@ -11,7 +11,6 @@ class Product extends BaseModel{
     this.name,
     this.purchasePrice,
     this.stock,
-    this.remaining,
     this.barcode,
     this.countryCode,
     this.salePrice,
@@ -29,7 +28,6 @@ class Product extends BaseModel{
   String? name;
   double? purchasePrice;
   int? stock;
-  int? remaining;
   String? barcode;
   String? countryCode;
   double? salePrice;

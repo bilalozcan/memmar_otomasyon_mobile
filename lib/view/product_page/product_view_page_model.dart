@@ -94,7 +94,7 @@ class ProductViewPageModel extends ChangeNotifier{
       "isActive": true,
       "createdUser": context.read<LoginPageViewModel>().user!.id,
       "createdDate": DateTime.now().toString(),
-      "supplierId": 0,
+      "supplierId": selectSupplier!.id,
       "sold": 0,
       "updateDate":  DateTime.now().toString(),
 

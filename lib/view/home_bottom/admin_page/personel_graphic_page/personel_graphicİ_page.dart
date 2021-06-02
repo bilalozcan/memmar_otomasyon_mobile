@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:memmar_otomasyon_mobile/core/base/base_state.dart';
 import 'package:memmar_otomasyon_mobile/model/receipt_model.dart';
 import 'package:memmar_otomasyon_mobile/service/receipt_service.dart';
+import 'package:memmar_otomasyon_mobile/service/statistic_service.dart';
 import 'package:memmar_otomasyon_mobile/view/login_page/login_page_view_model.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +12,7 @@ class PersonelGraphicPage extends StatefulWidget {
   _PersonelGraphicPageState createState() => _PersonelGraphicPageState();
 }
 
-class _PersonelGraphicPageState extends State<PersonelGraphicPage> {
+class _PersonelGraphicPageState extends BaseState<PersonelGraphicPage> {
 
 
 
@@ -18,47 +20,87 @@ class _PersonelGraphicPageState extends State<PersonelGraphicPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Future.delayed(Duration.zero,(){
+      context.read<PersonelGraphicViewModel>().wait=true;
+      context.read<PersonelGraphicViewModel>().getStatisticOne(context);
+    });
+
   }
   @override
   Widget build(BuildContext context) {
  return Scaffold(
      appBar: AppBar(
-       title: Text('Şirket Aylık Satışlar'),
+       title: Text('Çalışan  Satışlar'),
      ),
-     body: Center(
-         child: Container(
+     body: context.watch<PersonelGraphicViewModel>().wait==false? Column(
+       children: [
+         Row(
+           mainAxisSize: MainAxisSize.max,
+           mainAxisAlignment:MainAxisAlignment.spaceEvenly ,
+           children: [
+             GestureDetector(
+               onTap: (){
+                 Future.delayed(Duration.zero,(){
+                   context.read<PersonelGraphicViewModel>().wait=true;
+                   context.read<PersonelGraphicViewModel>().isSales=true;
+                   context.read<PersonelGraphicViewModel>().getStatisticOne(context);
+                 });
+               },
+               child: Container(
+                 color:!context.watch<PersonelGraphicViewModel>().isSales?Colors.white:Colors.blue,
+                 child: Padding(
+                   padding: const EdgeInsets.all(8.0),
+                   child: Text('Ürün adetine göre'),
+                 ),
+               ),
+             ),
+             GestureDetector(
+               onTap: (){
+                 Future.delayed(Duration.zero,(){
+                   context.read<PersonelGraphicViewModel>().wait=true;
+                   context.read<PersonelGraphicViewModel>().isSales=false;
+                   context.read<PersonelGraphicViewModel>().getStatisticOne(context);
+                 });
+               },
+               child: Container(
+                 color:!context.watch<PersonelGraphicViewModel>().isSales?Colors.blue:Colors.white,
+                 child: Padding(
+                   padding: const EdgeInsets.all(8.0),
+                   child: Text('Ürün Fiyatına göre'),
+                 ),
+               ),
+             )
+           ],
+         ),
+         Container(
+           height: dynamicHeight(0.75),
              child: SfCartesianChart(
-               // Initialize category axis
-                  primaryYAxis: CategoryAxis(),
+                 primaryYAxis: CategoryAxis(),
                  primaryXAxis: CategoryAxis(),
-                 series: <LineSeries<SalesData, String>>[
-                   LineSeries<SalesData, String>(
-                     // Bind data source
-                       dataSource:  <SalesData>[
-                         SalesData('OCAK', 999),
-                         SalesData('ŞUBAT', 28),
-                         SalesData('MART', 34),
-                         SalesData('NİSAN', 32),
-                         SalesData('MAYIS', 40)
-                       ],
-                       xValueMapper: (SalesData sales, _) => sales.year,
+                 series: <ChartSeries>[
+                   // Renders bar chart
+                   BarSeries<SalesData, String>(
+                       dataSource:  context.watch<PersonelGraphicViewModel>().salsesData,
+                       xValueMapper: (SalesData sales, _) => sales.user,
                        yValueMapper: (SalesData sales, _) => sales.sales
                    )
                  ]
              )
-         )
-     )
+         ),
+       ],
+     ):Center(child: CircularProgressIndicator()),
  );
   }
 }
 class SalesData {
-  SalesData(this.year, this.sales);
-  final String year;
-  final double sales;
+  SalesData(this.user, this.sales);
+  final String user;
+  final double  sales;
 }
 class PersonelGraphicViewModel extends ChangeNotifier {
-  final ReceiptService? _receiptService = ReceiptService.instance;
-  List<ReceiptModel> receiptList = [];
+  final StatisticService? _statisticService = StatisticService.instance;
+  List<SalesData> salsesData = [];
+  bool isSales = false;
   bool? _wait;
 
   bool get wait => _wait!;
@@ -67,15 +109,21 @@ class PersonelGraphicViewModel extends ChangeNotifier {
     _wait = value;
     notifyListeners();
   }
-  getReceiptList(BuildContext context) async {
+  getStatisticOne(BuildContext context) async {
     if (this._wait == true) {
-      var response = await _receiptService!.getReceipt(parameter: {
+      var response = await _statisticService!.getStatistic(queryParameters: {
         "companyId": context.read<LoginPageViewModel>().user!.companyId,
+        "isSales":isSales
+      },
+        path: 'one',
+      );
+      salsesData.clear();
+      for (var data in response["data"]) {
+        if(isSales)
+            salsesData.add(SalesData(data["fullName"], data["totalSales"]+0.0));
+        else
+          salsesData.add(SalesData(data["fullName"], data["totalAmount"]));
 
-      });
-      receiptList.clear();
-      for (var a in response) {
-        receiptList.add(a);
       }
       this.wait = false;
       notifyListeners();

@@ -47,7 +47,7 @@ class _ProductPageState extends BaseState<ProductPage> {
       context.read<ProductViewPageModel>().productType =
           widget.product!.productType;
       for(var a in context.read<SupplierListViewModel>().supplierList){
-        if(a.id == widget.product!.supplierld)
+        if(a.id == widget.product!.supplierId)
           context.read<ProductViewPageModel>().selectSupplier = a;
       }
     } else {
@@ -64,7 +64,6 @@ class _ProductPageState extends BaseState<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(context.read<ProductViewPageModel>().productType);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -162,7 +161,6 @@ class _ProductPageState extends BaseState<ProductPage> {
                       context.read<ProductViewPageModel>().productType = value;
                     },
                   ),
-                  if (context.watch<SupplierListViewModel>().wait == false)
                     supplierWidget(context),
                   SizedBox(
                     height: dynamicHeight(0.05),
@@ -228,15 +226,11 @@ class _ProductPageState extends BaseState<ProductPage> {
               padding: const EdgeInsets.only(left: 8.0),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<SupplierModel>(
-                  hint: Text(
-                    "Seçiniz",
-                    style: Theme.of(context).textTheme.bodyText2,
-                  ),
                   value:context.watch<ProductViewPageModel>().selectSupplier ,
                   onChanged: (newValue) {
                     setState(() {
-                      context.read<ProductViewPageModel>().selectSupplier =
-                          newValue;
+                      context.read<ProductViewPageModel>().supplierChange(newValue!);
+
                     });
                   },
                   isExpanded: true,

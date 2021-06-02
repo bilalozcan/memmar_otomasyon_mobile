@@ -31,6 +31,7 @@ class _HomeBottomState extends BaseState<HomeBottom> {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.watch<LoginPageViewModel>().company.name.toString()),
+        automaticallyImplyLeading: false,
         actions: [
           GestureDetector(
             onTap: (){
@@ -49,8 +50,8 @@ class _HomeBottomState extends BaseState<HomeBottom> {
         bottomNavigationBar: FancyBottomNavigation(
           tabs: [
             TabData(iconData: Icons.home, title: "Home"),
-            TabData(iconData: Icons.search, title: "Search"),
-            TabData(iconData: Icons.shopping_cart, title: "Basket")
+            TabData(iconData: Icons.add, title: "Fiş"),
+            if(context.watch<LoginPageViewModel>().user!.userType==0)TabData(iconData: Icons.admin_panel_settings, title: "Admin")
           ],
           onTabChangedListener: (position) {
             context.read<HomeBottomViewModel>().changeIndex(position);

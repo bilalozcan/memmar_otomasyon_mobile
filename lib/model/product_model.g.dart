@@ -22,7 +22,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     createdDate: json['createdDate'] == null
         ? null
         : DateTime.parse(json['createdDate'] as String),
-    supplierld: json['supplierld'] as int?,
+    supplierId: json['supplierId'] as int?,
     sold: json['sold'] as int?,
     updateDate: json['updateDate'] == null
         ? null
@@ -51,7 +51,7 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   val['isActive'] = instance.isActive;
   val['createdUser'] = instance.createdUser;
   val['createdDate'] = instance.createdDate?.toIso8601String();
-  val['supplierld'] = instance.supplierld;
+  val['supplierId'] = instance.supplierId;
   val['sold'] = instance.sold;
   val['updateDate'] = instance.updateDate?.toIso8601String();
   val['companyId'] = instance.companyId;

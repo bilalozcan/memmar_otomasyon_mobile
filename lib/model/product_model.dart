@@ -18,7 +18,7 @@ class Product extends BaseModel{
     this.isActive,
     this.createdUser,
     this.createdDate,
-    this.supplierld,
+    this.supplierId,
     this.sold,
     this.updateDate,
     this.companyId,
@@ -35,7 +35,7 @@ class Product extends BaseModel{
   bool? isActive;
   int? createdUser;
   DateTime? createdDate;
-  int? supplierld;
+  int? supplierId;
   int? sold;
   DateTime? updateDate;
   int? companyId;

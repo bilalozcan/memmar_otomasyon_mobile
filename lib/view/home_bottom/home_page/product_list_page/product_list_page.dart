@@ -101,7 +101,7 @@ class _ProductListPageState extends BaseState<ProductListPage> {
                                           color: Colors.black),
                                     ),
                                     Text(
-                                      'Kalan Stok: '+context.read<ProductListViewModel>().productList[index].stock.toString(),
+                                      'Kalan Stok: ${context.read<ProductListViewModel>().productList[index].stock!-context.read<ProductListViewModel>().productList[index].sold!}',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: dynamicHeight(0.02),
@@ -144,7 +144,7 @@ class _ProductListPageState extends BaseState<ProductListPage> {
                                   padding: const EdgeInsets.only(left:8.0),
                                   child: InkWell(
                                     onTap: (){
-
+                                          context.read<ProductListViewModel>().deletePrpduct(context,context.read<ProductListViewModel>().productList[index].id! );
                                     },
                                     child: Container(
                                       height: dynamicHeight(0.07),

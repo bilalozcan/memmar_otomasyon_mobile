@@ -23,6 +23,8 @@ extension ServicePathExtension on ServicePath {
         return '/product/list';
       case ServicePath.PRODUCTUPDATE:
         return '/product/update';
+      case ServicePath.PRODUCTDELETE://yapılmadı
+        return '/product/delete';
       case ServicePath.RECEIPTCREATE:
         return '/receipt/create';
       case ServicePath.RECEIPTLIST:
@@ -31,6 +33,10 @@ extension ServicePathExtension on ServicePath {
         return '/supplier/create';
       case ServicePath.SUPPLIERLIST:
         return '/supplier/list';
+      case ServicePath.SUPPLYLIST://yapılmadı
+        return '/supply/list';
+      case ServicePath.STATISTIC://yapılmadı
+        return '/statistic/';
     }
   }
 }

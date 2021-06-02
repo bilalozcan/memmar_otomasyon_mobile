@@ -25,7 +25,7 @@ class HomePageViewModel extends ChangeNotifier {
 List<HomePageContents> contents = [
   HomePageContents('Ürünler',Icons.production_quantity_limits,1,Colors.blueGrey,ProductListPage()),
   HomePageContents('Ürün Ekle',Icons.add,1,Colors.deepPurpleAccent,ProductPage()),
-  HomePageContents('Ürün Düzenle',Icons.edit,1,Colors.red,Container()),
+  HomePageContents('Ürün Düzenle',Icons.edit,1,Colors.red,ProductListPage()),
 ];
 
   final ProductService? _productService = ProductService.instance;

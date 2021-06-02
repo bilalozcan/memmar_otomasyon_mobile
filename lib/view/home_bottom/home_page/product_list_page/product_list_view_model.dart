@@ -10,7 +10,7 @@ class ProductListViewModel extends ChangeNotifier{
   var searchCont = TextEditingController(text: '');
   final ProductService? _productService = ProductService.instance;
   List<Product> productList = [];
-  bool? _wait;
+  bool? _wait=false;
 
    bool get wait {
      return this._wait!;

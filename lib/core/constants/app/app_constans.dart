@@ -12,6 +12,20 @@ class ApplicationConstants {
     'TÜTÜN',
     'TEMEL GIDA',
   ];
+  static List<String> MONTH_LIST = [
+    'OCAK',
+    'ŞUBAT',
+    'MART',
+    'NİSAN',
+    'MAYIS',
+    'HAZİRAN',
+    'TEMMUZ',
+    'AĞUSTOS',
+    'EYLÜL',
+    'EKİM',
+    'KASIM',
+    'ARALIK',
+  ];
   static List<String> USER_TYPE = [
     'YETKİLİ',
     'ÇALIŞAN',

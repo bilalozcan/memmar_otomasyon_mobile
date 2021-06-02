@@ -35,6 +35,8 @@ extension ServicePathExtension on ServicePath {
         return '/supplier/list';
       case ServicePath.SUPPLYLIST://yapılmadı
         return '/supply/list';
+      case ServicePath.STATISTIC://yapılmadı
+        return '/statistic/';
     }
   }
 }

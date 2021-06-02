@@ -52,7 +52,15 @@ class NetworkManager {
       return null;
     }
   }
-
+  Future dioGetMap<T extends BaseModel>(
+      {required String path, Map<String, dynamic>? queryParameters, bool isList = false}) async {
+    final response = await dio.get(path, queryParameters: queryParameters);
+    if (response.statusCode == HttpStatus.ok) {
+      return response.data;
+    } else {
+      print('Dio Get Error Status Code: ${response.statusCode}');
+    }
+  }
   /// Sabit bir reponse için GET methodu
   /// path: URL'in sonuna eklenecek endpoint kısmını belirtir
   /// model: GET işlemi sonucunda gelen yanıtın hangi model sınıfına dönüşeceğini belirtir

@@ -12,6 +12,10 @@ class HomeBottomViewModel extends ChangeNotifier {
   set index(int value) {
     _index = value;
   }
+  clear(){
+    index=0;
+
+  }
   changeIndex(int index){
     this._index = index;
     notifyListeners();

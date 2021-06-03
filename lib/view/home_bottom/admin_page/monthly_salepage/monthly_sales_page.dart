@@ -102,7 +102,7 @@ class SalesData {
 class MonthlySalesViewModel extends ChangeNotifier {
   final StatisticService? _statisticService = StatisticService.instance;
   List<SalesData> salsesData = [];
-  bool? _wait;
+  bool? _wait=false;
 bool isSales=true;
   bool get wait => _wait!;
 

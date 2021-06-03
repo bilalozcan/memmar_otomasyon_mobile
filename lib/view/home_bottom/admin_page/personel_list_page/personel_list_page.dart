@@ -136,7 +136,7 @@ class _PersonelListPageState extends BaseState<PersonelListPage> {
 class PersonelListViewPage extends ChangeNotifier {
   final AuthService? _authService = AuthService.instance;
   List<User> userList = [];
-  bool? _wait;
+  bool? _wait=false;
 
   bool get wait {
     return this._wait!;

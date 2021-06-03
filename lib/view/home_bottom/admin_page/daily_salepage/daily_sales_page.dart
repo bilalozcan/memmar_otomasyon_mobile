@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:memmar_otomasyon_mobile/core/base/base_state.dart';
 import 'package:memmar_otomasyon_mobile/model/receipt_model.dart';
 import 'package:memmar_otomasyon_mobile/service/receipt_service.dart';
+import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/daily_salepage/daily_sales_graphc_page.dart';
+import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/supply_list_page/supply_graphic_page.dart';
 import 'package:memmar_otomasyon_mobile/view/login_page/login_page_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -29,6 +31,16 @@ class _DailySalesPageState extends BaseState<DailySalesPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Günlük Satışlar'),
+          actions: [
+            GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DailySalesGraphicPage()),
+                  );
+                },
+                child: Icon(Icons.insert_chart))
+          ],
         ),
         body: Container(
           height: dynamicHeight(1),
@@ -247,7 +259,7 @@ class DailySalesViewModel extends ChangeNotifier {
   }
 
   List<ReceiptModel> receiptList = [];
-  bool? _wait;
+  bool? _wait=false;
 
   bool get wait => _wait!;
 

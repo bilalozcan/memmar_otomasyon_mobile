@@ -3,6 +3,7 @@ import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:memmar_otomasyon_mobile/core/base/base_state.dart';
 import 'package:memmar_otomasyon_mobile/model/supplier_model.dart';
 import 'package:memmar_otomasyon_mobile/service/supplier_service.dart';
+import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/supplier_list_page/supplier_list_graphic_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/home_page/product_list_page/product_list_view_model.dart';
 import 'package:memmar_otomasyon_mobile/view/login_page/login_page_view_model.dart';
 import 'package:memmar_otomasyon_mobile/view/product_page/product_view_page_model.dart';
@@ -29,7 +30,18 @@ class _SupplierListPageState extends BaseState<SupplierListPage> {
           title: Text(
               'Tedarikçi Listesi'
           ),
+          actions: [
+            GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SupplierListGraphicPage()),
+                  );
+                },
+                child: Icon(Icons.insert_chart))
+          ],
         ),
+
         body: context.watch<SupplierListViewModel>().wait==false?ListView.builder(
           itemCount:  context.read<SupplierListViewModel>().supplierList.length,
           itemBuilder: (BuildContext context, int index) {

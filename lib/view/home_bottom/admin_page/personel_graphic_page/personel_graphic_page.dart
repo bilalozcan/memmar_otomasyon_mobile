@@ -101,7 +101,7 @@ class PersonelGraphicViewModel extends ChangeNotifier {
   final StatisticService? _statisticService = StatisticService.instance;
   List<SalesData> salsesData = [];
   bool isSales = false;
-  bool? _wait;
+  bool? _wait=false;
 
   bool get wait => _wait!;
 
@@ -122,7 +122,7 @@ class PersonelGraphicViewModel extends ChangeNotifier {
         if(isSales)
             salsesData.add(SalesData(data["fullName"], data["totalSales"]+0.0));
         else
-          salsesData.add(SalesData(data["fullName"], data["totalAmount"]));
+          salsesData.add(SalesData(data["fullName"], data["totalAmount"]+0.0));
 
       }
       this.wait = false;

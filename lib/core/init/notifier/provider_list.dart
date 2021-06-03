@@ -1,13 +1,15 @@
 import 'package:memmar_otomasyon_mobile/core/init/notifier/theme_notifier.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/admin_page_view_model.dart';
+import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/daily_salepage/daily_sales_graphc_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/daily_salepage/daily_sales_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/monthly_salepage/monthly_sales_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/monthly_supplypage/monthly_supply_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/personel_created_page/personel_created_view_model.dart';
-import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/personel_graphic_page/personel_graphic%C4%B0_page.dart';
+import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/personel_graphic_page/personel_graphic_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/personel_list_page/personel_list_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/product_type_sales_page/product_type_sales_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/supplier_created_page/supplier_created_page.dart';
+import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/supplier_list_page/supplier_list_graphic_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/supplier_list_page/supplier_list_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/supply_list_page/supply_graphic_page.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/admin_page/supply_list_page/supply_list_page.dart';
@@ -55,5 +57,7 @@ class ApplicationProvider {
     ChangeNotifierProvider(create: (context) => MonthlySupplyViewModel()),
     ChangeNotifierProvider(create: (context) => ProductTypeSalesViewModel()),
     ChangeNotifierProvider(create: (context) => SupplyGraphicViewModel()),
+    ChangeNotifierProvider(create: (context) => DailySalesGraphicViewModel()),
+    ChangeNotifierProvider(create: (context) => SupplierListGraphicViewModel()),
   ];
 }

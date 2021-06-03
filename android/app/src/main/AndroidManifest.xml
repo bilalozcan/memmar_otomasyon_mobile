@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mobuni.memmar_otomasyon_mobile">
    <application
-        android:label="memmar_otomasyon_mobile"
+        android:label="market_otomasyon_mobile"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
         <activity

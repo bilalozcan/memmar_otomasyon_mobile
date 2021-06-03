@@ -78,7 +78,8 @@ class DailySalesGraphicViewModel extends ChangeNotifier {
       );
       salsesData.clear();
       for (var data in response["data"]) {
-        SalesData sales = SalesData(data["month"], data["day"],data["year"],data["totalAmount"]);
+        SalesData sales = SalesData(data["month"], data["day"],data["year"],data["totalAmount"]+0.0);
+        if(data["month"]==6)
         salsesData.add(sales);
       }
       this.wait = false;

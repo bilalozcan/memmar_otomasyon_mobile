@@ -5,7 +5,6 @@ import 'package:memmar_otomasyon_mobile/core/init/notifier/theme_notifier.dart';
 import 'package:memmar_otomasyon_mobile/view/home_bottom/home_bottom.dart';
 import 'package:memmar_otomasyon_mobile/view/login_page/login_page.dart';
 import 'package:provider/provider.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocaleManager.preferencesInit();

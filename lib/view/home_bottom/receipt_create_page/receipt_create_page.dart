@@ -192,7 +192,7 @@ class _ReceiptCreatePageState extends BaseState<ReceiptCreatePage> {
                           onTap: () {
                             int selectQ =0;
                             List<String> list = [];
-                            for(int i = 0;i<context.watch<ReceiptCreateViewModel>().sales[index].quantity!;++i){
+                            for(int i = 0;i<context.read<ReceiptCreateViewModel>().sales[index].quantity!;++i){
                               list.add('${i+1}');
                             }
                             AwesomeDialog(

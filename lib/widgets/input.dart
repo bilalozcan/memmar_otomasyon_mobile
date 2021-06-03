@@ -82,7 +82,7 @@ class _CustomInputState extends BaseState<CustomInput> {
                 child: Row(
                   children: [
                     Container(
-                      width: dynamicWidth(widget.width! / MediaQuery.of(context).size.width)-dynamicWidth(0.1),
+                      width: dynamicWidth(widget.width! / MediaQuery.of(context).size.width)-dynamicWidth(0.2),
                       child: TextFormField(
                         enabled: widget.enabled,
                         textInputAction: widget.inputAction,

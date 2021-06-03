@@ -97,7 +97,7 @@ class _MonthlySalesPageState extends BaseState<MonthlySalesPage> {
 class SalesData {
   SalesData(this.user, this.sales);
   final String user;
-  final int sales;
+  final double sales;
 }
 class MonthlySalesViewModel extends ChangeNotifier {
   final StatisticService? _statisticService = StatisticService.instance;
@@ -122,11 +122,11 @@ bool isSales=true;
         SalesData sales;
         if(isSales){
           String month = ApplicationConstants.MONTH_LIST[data["month"]-1];
-          sales = SalesData(month, data["totalAmount"]);
+          sales = SalesData(month, data["totalAmount"]+0.0);
         }
         else{
           String month = ApplicationConstants.MONTH_LIST[data["ay"]-1];
-          sales = SalesData(month, data["quantity"]);
+          sales = SalesData(month, data["quantity"]+0.0);
         }
 
 

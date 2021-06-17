@@ -1,6 +1,6 @@
 # Memmar Market Otomasyonu
 
-* SQL Server ile çalışan bir market mobil uygulamasıdır. Birden çok market için tasarlanmış; markete ürün ekleme, ürün satma, stok güncelleme, tedarikçi ekleme, çeşitli istatistikleri görüntüleme gibi çok çeştili özellikleri barındırır.
+* SQL Server ile çalışan bir market mobil uygulamasıdır. Birden çok market ve birden fazla çalışanı için tasarlanmış; markete ürün ekleme, ürün satma, stok güncelleme, tedarikçi ekleme, çeşitli istatistikleri görüntüleme gibi çok çeştili özellikleri barındırıran bir mobil uygulamadır.
 
 * Veritabanı olarak MsSQL kullanılmıştır
 
@@ -12,30 +12,30 @@
 
 ## Uygulama Ekran Görüntüleri
 
-![alt text](/screenshots/Screenshot_1622752197.png "Title")
+Giriş Ekranı             |  Ana Sayfa
+:-------------------------:|:-------------------------:
+![alt text](/screenshots/Screenshot_1622752197.png "Giriş Ekranı") | ![alt text](/screenshots/Screenshot_1622752229.png "Ana Sayfa")
 
-![alt text](/screenshots/Screenshot_1622752229.png "Title")
+Ürün Arama             |  Ürün Satışı
+:-------------------------:|:-------------------------:
+![alt text](/screenshots/Screenshot_1622752244.png "Ürün Arama") | ![alt text](/screenshots/Screenshot_1622752277.png "Ürün Satışı")
 
-![alt text](/screenshots/Screenshot_1622752244.png "Title")
+Ürün Listesi             |  Ürün Ekleme
+:-------------------------:|:-------------------------:
+![alt text](/screenshots/Screenshot_1622752291.png "Ürün Listesi") | ![alt text](/screenshots/Screenshot_1622752302.png "Ürün Ekleme")
 
-![alt text](/screenshots/Screenshot_1622752277.png "Title")
+Market Tüm Özellikler      |  Personel Listesi
+:-------------------------:|:-------------------------:
+![alt text](/screenshots/Screenshot_1622752308.png "Market Tüm Özellikler") | ![alt text](/screenshots/Screenshot_1622752311.png "Personel Listesi")
 
-![alt text](/screenshots/Screenshot_1622752291.png "Title")
+Günlük Satışlar             |  Aylık Gelir İstatistiği
+:-------------------------:|:-------------------------:
+![alt text](/screenshots/Screenshot_1622752324.png "Günlük Satışlar") | ![alt text](/screenshots/Screenshot_1622752517.png "Aylık Gelir İstatistiği")
 
-![alt text](/screenshots/Screenshot_1622752302.png "Title")
+Tedarikçi Ekleme             |  Tedarikçi Listesi
+:-------------------------:|:-------------------------:
+![alt text](/screenshots/Screenshot_1622752534.png "Tedarikçi Ekleme") | ![alt text](/screenshots/Screenshot_1622752537.png "Tedarikçi Listesi")
 
-![alt text](/screenshots/Screenshot_1622752308.png "Title")
-
-![alt text](/screenshots/Screenshot_1622752311.png "Title")
-
-![alt text](/screenshots/Screenshot_1622752324.png "Title")
-
-![alt text](/screenshots/Screenshot_1622752517.png "Title")
-
-![alt text](/screenshots/Screenshot_1622752534.png "Title")
-
-![alt text](/screenshots/Screenshot_1622752537.png "Title")
-
-![alt text](/screenshots/Screenshot_1622752540.png "Title")
-
-![alt text](/screenshots/Screenshot_1622752552.png "Title")
+Tedarik İstatistiği             |  Ayarlar
+:-------------------------:|:-------------------------:
+![alt text](/screenshots/Screenshot_1622752540.png "Tedarik İstatistiği") | ![alt text](/screenshots/Screenshot_1622752552.png "Ayarlar")

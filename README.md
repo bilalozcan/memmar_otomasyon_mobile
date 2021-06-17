@@ -1,25 +1,41 @@
-# memmar_otomasyon_mobile
+# Memmar Market Otomasyonu
 
-Memmar Market Otomasyon Projesi
+* SQL Server ile çalışan bir market mobil uygulamasıdır. Birden çok market için tasarlanmış; markete ürün ekleme, ürün satma, stok güncelleme, tedarikçi ekleme, çeşitli istatistikleri görüntüleme gibi çok çeştili özellikleri barındırır.
 
-## Getting Started
+* Veritabanı olarak MsSQL kullanılmıştır
 
-This project is a starting point for a Flutter application.
+* Veritabanı Azure üzerindedir.
 
-A few resources to get you started if this is your first Flutter project:
+* Web Servis Node.js ile yazılmıştır. [Buradan Node.js kodlarına erişebilirsiniz.](https://github.com/bilalozcan/memmar_otomasyon_backend "Memmar Node.js Backend")
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+* Web Servis de Azure üzerinde çalışmaktadır.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Uygulama Ekran Görüntüleri
 
-pedantic
-provider
-hive
-toast
-http
-awesome_dialog: ^1.3.2
- charts_flutter: ^0.8.1
+![alt text](/screenshots/Screenshot_1622752197.png "Title")
 
+![alt text](/screenshots/Screenshot_1622752229.png "Title")
+
+![alt text](/screenshots/Screenshot_1622752244.png "Title")
+
+![alt text](/screenshots/Screenshot_1622752277.png "Title")
+
+![alt text](/screenshots/Screenshot_1622752291.png "Title")
+
+![alt text](/screenshots/Screenshot_1622752302.png "Title")
+
+![alt text](/screenshots/Screenshot_1622752308.png "Title")
+
+![alt text](/screenshots/Screenshot_1622752311.png "Title")
+
+![alt text](/screenshots/Screenshot_1622752324.png "Title")
+
+![alt text](/screenshots/Screenshot_1622752517.png "Title")
+
+![alt text](/screenshots/Screenshot_1622752534.png "Title")
+
+![alt text](/screenshots/Screenshot_1622752537.png "Title")
+
+![alt text](/screenshots/Screenshot_1622752540.png "Title")
+
+![alt text](/screenshots/Screenshot_1622752552.png "Title")
